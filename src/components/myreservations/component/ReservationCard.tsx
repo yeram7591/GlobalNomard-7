@@ -16,9 +16,13 @@ interface ReservationCardProps {
     | 'canceled'
     | 'completed'
     | undefined;
+  onReviewClick: () => void;
 }
 
-const ReservationCard: React.FC<ReservationCardProps> = ({ reservations }) => {
+const ReservationCard: React.FC<ReservationCardProps> = ({
+  reservations,
+  onReviewClick,
+}) => {
   const [currentReservations, setCurrentReservations] = useState<
     IMyReservation[]
   >(reservations || []);
@@ -117,7 +121,9 @@ const ReservationCard: React.FC<ReservationCardProps> = ({ reservations }) => {
                 {reservation.status === 'completed' &&
                   reservation.reviewSubmitted === false && (
                     <div className="">
-                      <Button onClick={() => {}} size={'small'} />
+                      <Button onClick={onReviewClick} size={'small'}>
+                        후기 작성
+                      </Button>
                     </div>
                   )}
                 {reservation.status === 'pending' && <div className=""></div>}

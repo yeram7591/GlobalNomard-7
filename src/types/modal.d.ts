@@ -11,13 +11,13 @@ interface IModalPortal {
 interface IBaseModal {
   type: 'modal' | 'nonModal';
   size:
-  | 'alert'
-  | 'confirm'
-  | 'review'
-  | 'reservation'
-  | 'reservationDetailLarge'
-  | 'reservationDetailMedium'
-  | 'notice';
+    | 'alert'
+    | 'confirm'
+    | 'review'
+    | 'reservation'
+    | 'reservationDetailLarge'
+    | 'reservationDetailMedium'
+    | 'notice';
   titleContent?: null | string;
   tStyle?: 'review' | 'reservationDetail' | 'notice';
   xStyle?: 'review' | 'reservationDetail' | 'notice';
@@ -32,6 +32,10 @@ type IAlertModal = Pick<IBaseModal, 'children'> & {
 };
 
 type IConfirmModal = Pick<IBaseModal, 'children'>;
+
+interface ReviewModal {
+  reservation: IMyReservation | null;
+}
 
 interface ITabContent {
   options: { label: string; value: string }[];

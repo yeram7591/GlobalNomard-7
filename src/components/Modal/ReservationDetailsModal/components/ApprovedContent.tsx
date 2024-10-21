@@ -9,7 +9,6 @@ function ApprovedContent({
   setValue,
   approvedReservations,
   setLabel,
-  // setApprovedReservations,
 }: ITabContent) {
   const dateString = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
   const reservationData = reservations.find(
@@ -39,13 +38,12 @@ function ApprovedContent({
         <span className="text-2lg font-semibold">예약 내역</span>
         {reservationData ? (
           <div>
-            <div className="max-h-72 overflow-y-auto">
+            <div className="max-h-[200px] overflow-y-auto">
               {approvedReservations.length > 0 ? (
                 approvedReservations.map((reservation) => (
                   <ReservationDetailCard
                     key={`${reservation.scheduleId}-${reservation.userId}`}
                     reservation={reservation}
-                    // setApprovedReservations={setApprovedReservations}
                   />
                 ))
               ) : (

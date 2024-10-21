@@ -56,6 +56,12 @@ function ReservationDetailsModal({
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [label, setLabel] = useState('');
 
+  const tabToTab = {
+    requestTab: 'pending',
+    approvedTab: 'confirmed',
+    rejectedTab: 'declined',
+  };
+
   const dateString = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
 
   const { data: reservedSchedule = [] } = useReservedSchedule(
@@ -69,13 +75,7 @@ function ReservationDetailsModal({
 
   const scheduleId = selectedSchedule ? selectedSchedule.scheduleId : null;
 
-  const status = selectedSchedule
-    ? selectedSchedule.count.declined > 0
-      ? 'declined'
-      : selectedSchedule.count.pending > 0
-        ? 'pending'
-        : 'confirmed'
-    : 'pending';
+  const status = tabToTab[activeTab];
 
   const { data: reservationsData } = useReservations(
     activityId,
@@ -83,8 +83,6 @@ function ReservationDetailsModal({
     scheduleId,
     status,
   );
-
-  console.log('Reservations Data:', reservationsData);
 
   const options = reservedSchedule.map((schedule) => ({
     label: `${schedule.startTime} ~ ${schedule.endTime}`,

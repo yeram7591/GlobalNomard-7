@@ -131,10 +131,24 @@ const Register = () => {
       bannerImageUrl,
       subImageUrls,
       address,
-      schedules: availableTimes.map((time) => ({
-        ...time,
-        date: time.date ? time.date.toISOString().split('T')[0] : null,
-      })),
+      // schedules: availableTimes.map((time) => ({
+      //   ...time,
+      //   date: time.date ? time.date.toISOString().split('T')[0] : null,
+      // })),
+      schedules: availableTimes.map((time) => {
+        if (time.date) {
+          time.date.setDate(time.date.getDate() + 1);
+          return {
+            ...time,
+            date: time.date.toISOString().split('T')[0],
+          };
+        } else {
+          return {
+            ...time,
+            date: null,
+          };
+        }
+      }),
     };
     console.log(postData);
     submitDataMutation.mutate(postData);

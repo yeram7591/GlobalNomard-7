@@ -91,7 +91,7 @@ function Calendar({ reservations, changeMonth, currentDate, activityId }) {
                 </div>
               )}
               {reservationData.reservations.completed > 0 && (
-                <div className="w-full">
+                <div className="w-full rounded-[4px] bg-gray-dd px-[4px] py-[3px] text-sm font-semibold text-gray-4b">
                   완료 {reservationData.reservations.completed}
                 </div>
               )}

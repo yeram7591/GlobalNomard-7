@@ -311,9 +311,16 @@ function ActivityDetail() {
                   </div>
                 </div>
                 <div>
-                  {reviewData.reviews.map((review: any) => (
+                  {/* {reviewData.reviews.map((review: any) => (
                     <ReviewCard review={review} />
-                  ))}
+                  ))} */}
+                  {reviewData.reviews && reviewData.reviews.length > 0 ? (
+                    reviewData.reviews.map((review: any) => (
+                      <ReviewCard key={review.id} review={review} />
+                    ))
+                  ) : (
+                    <p>후기가 없습니다.</p>
+                  )}
                 </div>
               </div>
             </div>

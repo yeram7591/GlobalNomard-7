@@ -150,7 +150,9 @@ function ReservationModal({ activityId }: IReservationModal) {
           <span>₩ {headCount * price}</span>
         </div>
       </div>
-      <AlertModal>예약이 완료되었습니다.</AlertModal>
+      {reservationMutation.isSuccess && (
+        <AlertModal>예약이 완료되었습니다.</AlertModal>
+      )}
     </div>
   );
 }

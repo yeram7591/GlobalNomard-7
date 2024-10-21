@@ -1,11 +1,16 @@
 'use client';
 import getMyReservations from './component/getMyReservation';
 import EmptyPage from './component/EmptyPage';
-import { ReservationDatas } from '@/types/myActivityReservationList';
+import {
+  IMyReservation,
+  ReservationDatas,
+} from '@/types/myActivityReservationList';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import ReservationCard from './component/ReservationCard';
+import ReviewModal from '../Modal/ReviewModal';
+import { useModalStore } from '@/stores/modalStore';
 
 type ReservationStatus =
   | 'pending'
@@ -19,6 +24,14 @@ const MyReservations: React.FC = () => {
     ReservationStatus | undefined
   >(undefined);
   const { ref, inView } = useInView();
+  const [selectedReservation, setSelectedReservation] =
+    useState<IMyReservation | null>(null);
+  const { setOpenModal } = useModalStore();
+
+  const openReviewModal = (reservation: IMyReservation) => {
+    setSelectedReservation(reservation);
+    setOpenModal();
+  };
 
   const {
     data,
@@ -71,6 +84,7 @@ const MyReservations: React.FC = () => {
                 key={reservation.id}
                 reservations={[reservation]}
                 selectedStatus={selectedStatus}
+                onReviewClick={() => openReviewModal(reservation)}
               />
             ))}
           </div>
@@ -78,6 +92,7 @@ const MyReservations: React.FC = () => {
           <div ref={ref} />
         </div>
       )}
+      <ReviewModal reservation={selectedReservation} />
     </div>
   );
 };

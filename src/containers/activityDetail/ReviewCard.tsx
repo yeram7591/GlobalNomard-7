@@ -4,11 +4,12 @@ import React from 'react';
 import { format } from 'date-fns';
 
 function ReviewCard({ review }: { review: any }) {
+  const defaultProfileImage = '/path/to/default/profile/image.png';
   return (
     <div>
       <div className="flex items-start gap-[16px] border-b-[1px] border-black-nomad pb-[24px]">
         <Image
-          src={review.user.profileImageUrl}
+          src={review.user.profileImageUrl || defaultProfileImage}
           alt={'프로필이미지'}
           width={45}
           height={45}
